@@ -54,6 +54,9 @@ static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "togg
 static const char *mutemic[] = { "/usr/bin/pactl", "set-source-mute", "1", "toggle",  NULL };
 
 static const char *scrot[] = { "/usr/local/bin/screenshot", NULL };
+static const char *slock[] = { "/usr/local/bin/slock", NULL };
+
+
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
@@ -91,8 +94,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
 //	{ MODKEY,                       XK_space,  setlayout,      {0} },
 //	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+//	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+//	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
@@ -111,7 +114,8 @@ static const Key keys[] = {
 	{ 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
 	{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
     { 0,                       XF86XK_AudioMicMute, spawn, {.v = mutemic } },
-    { MODKEY|ShiftMask,             XK_p,       spawn,      {.v = scrot } }
+    { MODKEY|ShiftMask,             XK_p,       spawn,      {.v = scrot } },
+    { MODKEY|ControlMask,           XK_l,       spawn,      {.v = slock } }
 };
 
 /* button definitions */
