@@ -54,7 +54,7 @@ static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_
 static const char *mutemic[] = { "/usr/bin/pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle",  NULL };
 
 static const char *scrot[] = { "/usr/local/bin/screenshot", NULL };
-static const char *slock[] = { "/usr/local/bin/slock", NULL };
+static const char *slock[] = { "/usr/bin/slock", NULL };
 
 
 /* key definitions */
