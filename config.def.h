@@ -48,15 +48,6 @@ static const Layout layouts[] = {
 	{ "HHH",      gaplessgrid },
 };
 
-static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",     NULL };
-static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",     NULL };
-static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle",  NULL };
-static const char *mutemic[] = { "/usr/bin/pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle",  NULL };
-
-static const char *scrot[] = { "/usr/local/bin/screenshot", NULL };
-static const char *slock[] = { "/usr/bin/slock", NULL };
-
-
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
@@ -69,9 +60,19 @@ static const char *slock[] = { "/usr/bin/slock", NULL };
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
+static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",     NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle",  NULL };
+static const char *mutemic[] = { "/usr/bin/pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle",  NULL };
+
+static const char *scrot[] = { "/usr/local/bin/screenshot", NULL };
+static const char *slock[] = { "/usr/bin/slock", NULL };
+
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
+static const char *add_bookmark[] = { "/home/const/.local/bin/add_bookmark.sh", NULL };
+
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -115,7 +116,9 @@ static const Key keys[] = {
 	{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
     { 0,                       XF86XK_AudioMicMute, spawn, {.v = mutemic } },
     { MODKEY|ShiftMask,             XK_p,       spawn,      {.v = scrot } },
-    { MODKEY|ControlMask,           XK_l,       spawn,      {.v = slock } }
+    { MODKEY|ControlMask,           XK_l,       spawn,      {.v = slock } },
+    { MODKEY|ControlMask,           XK_b,       spawn,      {.v = add_bookmark } },
+    { MODKEY|ShiftMask,             XK_Insert,       spawn,      SHCMD("xdotool type $(grep -v '^#' ~/.local/misc/bookmarks.txt | dmenu -i -l 50 | cut -d' ' -f1)") }, 
 };
 
 /* button definitions */
